@@ -30,7 +30,7 @@ const HomePage = () => {
             <p className="px-2 text-xs uppercase text-slate-500">Tabs</p>
             <button
               onClick={addTab}
-              className="text-slate-400 hover:text-white transition-colors text-xl hover:text-bold"
+              className="text-slate-400 hover:text-white transition-colors text-xl hover:font-bold"
             >
               +
             </button>
