@@ -47,7 +47,7 @@ export const addBlockToActiveTabAtom = atom(
           ? {
               ...tab,
               blocks: [...tab.blocks, newBlock],
-              updatedAt: Date.now(),
+              lastUpdate: Date.now(),
             }
           : tab,
       ),
