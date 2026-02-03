@@ -1,29 +1,24 @@
 import { atom } from "jotai";
-import type { Block, Tab } from "../types/types";
+import type { Tab } from "../types/types";
 import { mockTabs } from "../utils/mockTabs";
 
 export const tabsAtom = atom<Tab[]>(mockTabs);
 
-export const activeTabIdAtom = atom<string>(mockTabs[0].id);
+export const activeTabIdAtom = atom<string>(mockTabs[0]?.id ?? "");
 
 /* derived atoms */
-
 export const activeTabAtom = atom((get) => {
   const tabs = get(tabsAtom);
   const activeId = get(activeTabIdAtom);
-
   return tabs.find((t) => t.id === activeId) ?? null;
 });
 
-export const activeBlocksAtom = atom((get) => {
-  return get(activeTabAtom)?.blocks ?? [];
-});
-
+/* actions */
 export const addTabAtom = atom(null, (get, set) => {
   const newTab: Tab = {
     id: crypto.randomUUID(),
     title: "New tab",
-    blocks: [],
+    content: "",
     lastUpdate: Date.now(),
   };
 
@@ -41,6 +36,20 @@ export const setActiveTabTitleAtom = atom(null, (get, set, title: string) => {
     ),
   );
 });
+
+export const setActiveTabContentAtom = atom(
+  null,
+  (get, set, content: string) => {
+    const id = get(activeTabIdAtom);
+
+    set(
+      tabsAtom,
+      get(tabsAtom).map((t) =>
+        t.id === id ? { ...t, content, lastUpdate: Date.now() } : t,
+      ),
+    );
+  },
+);
 
 export const deleteActiveTabAtom = atom(null, (get, set) => {
   const tabs = get(tabsAtom);

@@ -1,23 +1,13 @@
 import { useAtom, useSetAtom } from "jotai";
-import {
-  tabsAtom,
-  activeTabIdAtom,
-  activeTabAtom,
-  activeBlocksAtom,
-  addTabAtom,
-  setActiveTabTitleAtom,
-} from "../atoms/tabsAtom";
+import { tabsAtom, activeTabIdAtom, addTabAtom } from "../atoms/tabsAtom";
 
-import CodeBlock from "../components/codeBlock/codeBlock";
 import PageItem from "../components/pageItem/pageItem";
+import MainEditor from "../components/mainEditor/mainEditor";
 
 const HomePage = () => {
   const [tabs] = useAtom(tabsAtom);
   const [activeTabId, setActiveTabId] = useAtom(activeTabIdAtom);
-  const [activeTab] = useAtom(activeTabAtom);
-  const [blocks] = useAtom(activeBlocksAtom);
   const addTab = useSetAtom(addTabAtom);
-  const setTitle = useSetAtom(setActiveTabTitleAtom);
 
   return (
     <div className="flex h-screen bg-slate-950 text-slate-200">
@@ -51,36 +41,7 @@ const HomePage = () => {
         </div>
       </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 p-8 overflow-auto">
-        <input
-          className="w-full bg-transparent text-2xl font-semibold outline-none mb-6"
-          value={activeTab?.title ?? ""}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-
-        {blocks.map((block) => {
-          if (block.type === "text") {
-            return (
-              <div key={block.id} className="mb-6 text-slate-400">
-                {block.content}
-              </div>
-            );
-          }
-
-          if (block.type === "code") {
-            return (
-              <CodeBlock
-                key={block.id}
-                language={block.language}
-                code={block.content}
-              />
-            );
-          }
-
-          return null;
-        })}
-      </main>
+      <MainEditor />
     </div>
   );
 };

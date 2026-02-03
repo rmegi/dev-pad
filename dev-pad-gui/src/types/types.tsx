@@ -11,11 +11,9 @@ export type Block =
       language: string;
     };
 
-
-export type Tab = {
+export interface Tab {
   id: string;
   title: string;
-  blocks: Block[];
+  content: string;
   lastUpdate: number;
 };
-    
