@@ -10,6 +10,6 @@ You can type anything here.
 This behaves like Notepad++.
 
 Enjoy!`,
-    lastUpdate: Date.now(),
+    lastUpdate: 0,
   },
 ];
