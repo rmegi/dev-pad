@@ -19,42 +19,6 @@ export const activeBlocksAtom = atom((get) => {
   return get(activeTabAtom)?.blocks ?? [];
 });
 
-/* write atom */
-
-export const updateActiveBlocksAtom = atom(
-  null,
-  (get, set, blocks: Block[]) => {
-    const activeId = get(activeTabIdAtom);
-
-    set(
-      tabsAtom,
-      get(tabsAtom).map((t) =>
-        t.id === activeId ? { ...t, blocks, lastUpdate: Date.now() } : t,
-      ),
-    );
-  },
-);
-
-export const addBlockToActiveTabAtom = atom(
-  null,
-  (get, set, newBlock: Block) => {
-    const activeId = get(activeTabIdAtom);
-
-    set(
-      tabsAtom,
-      get(tabsAtom).map((tab) =>
-        tab.id === activeId
-          ? {
-              ...tab,
-              blocks: [...tab.blocks, newBlock],
-              lastUpdate: Date.now(),
-            }
-          : tab,
-      ),
-    );
-  },
-);
-
 export const addTabAtom = atom(null, (get, set) => {
   const newTab: Tab = {
     id: crypto.randomUUID(),
@@ -76,4 +40,23 @@ export const setActiveTabTitleAtom = atom(null, (get, set, title: string) => {
       t.id === id ? { ...t, title, lastUpdate: Date.now() } : t,
     ),
   );
+});
+
+export const deleteActiveTabAtom = atom(null, (get, set) => {
+  const tabs = get(tabsAtom);
+  const activeId = get(activeTabIdAtom);
+
+  if (tabs.length === 0) return;
+
+  const index = tabs.findIndex((t) => t.id === activeId);
+  const newTabs = tabs.filter((t) => t.id !== activeId);
+
+  set(tabsAtom, newTabs);
+
+  if (newTabs.length === 0) {
+    set(activeTabIdAtom, "");
+  } else {
+    const nextTab = newTabs[index - 1] ?? newTabs[0];
+    set(activeTabIdAtom, nextTab.id);
+  }
 });
