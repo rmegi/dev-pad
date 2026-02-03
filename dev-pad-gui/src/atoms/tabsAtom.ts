@@ -1,16 +1,21 @@
 import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 import type { Tab } from "../types/types";
 import { mockTabs } from "../utils/mockTabs";
 
-export const tabsAtom = atom<Tab[]>(mockTabs);
+/* persisted atoms */
+export const tabsAtom = atomWithStorage<Tab[]>("devpad.tabs", mockTabs);
 
-export const activeTabIdAtom = atom<string>(mockTabs[0]?.id ?? "");
+export const activeTabIdAtom = atomWithStorage<string>(
+  "devpad.activeTabId",
+  mockTabs[0]?.id ?? "",
+);
 
-/* derived atoms */
+/* derived */
 export const activeTabAtom = atom((get) => {
   const tabs = get(tabsAtom);
-  const activeId = get(activeTabIdAtom);
-  return tabs.find((t) => t.id === activeId) ?? null;
+  const id = get(activeTabIdAtom);
+  return tabs.find((t) => t.id === id) ?? null;
 });
 
 /* actions */
@@ -22,7 +27,8 @@ export const addTabAtom = atom(null, (get, set) => {
     lastUpdate: Date.now(),
   };
 
-  set(tabsAtom, [...get(tabsAtom), newTab]);
+  const updatedTabs = [...get(tabsAtom), newTab];
+  set(tabsAtom, updatedTabs);
   set(activeTabIdAtom, newTab.id);
 });
 
