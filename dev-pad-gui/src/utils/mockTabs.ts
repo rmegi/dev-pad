@@ -2,7 +2,7 @@ import type { Tab } from "../types/types";
 
 export const mockTabs: Tab[] = [
   {
-    id: crypto.randomUUID(),
+    id: "welcome-tab",
     title: "Welcome",
     content: `// Welcome to DevPad 🚀
 
