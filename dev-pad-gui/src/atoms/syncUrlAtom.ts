@@ -13,5 +13,5 @@ export const syncUrlAtom = atom(null, (get) => {
 
   timer = window.setTimeout(() => {
     writeStateToUrl(tabs, activeTabId);
-  }, 400);
+  }, 250);
 });
