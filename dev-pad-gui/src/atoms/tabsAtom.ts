@@ -2,6 +2,7 @@ import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import type { Tab } from "../types/types";
 import { mockTabs } from "../utils/mockTabs";
+import { syncUrlAtom } from "./syncUrlAtom";
 
 /* persisted atoms */
 export const tabsAtom = atomWithStorage<Tab[]>("devpad.tabs", mockTabs);
@@ -30,6 +31,8 @@ export const addTabAtom = atom(null, (get, set) => {
   const updatedTabs = [...get(tabsAtom), newTab];
   set(tabsAtom, updatedTabs);
   set(activeTabIdAtom, newTab.id);
+
+  set(syncUrlAtom);
 });
 
 export const setActiveTabTitleAtom = atom(null, (get, set, title: string) => {
@@ -41,6 +44,8 @@ export const setActiveTabTitleAtom = atom(null, (get, set, title: string) => {
       t.id === id ? { ...t, title, lastUpdate: Date.now() } : t,
     ),
   );
+
+  set(syncUrlAtom);
 });
 
 export const setActiveTabContentAtom = atom(
@@ -54,6 +59,8 @@ export const setActiveTabContentAtom = atom(
         t.id === id ? { ...t, content, lastUpdate: Date.now() } : t,
       ),
     );
+
+    set(syncUrlAtom);
   },
 );
 
@@ -74,4 +81,6 @@ export const deleteActiveTabAtom = atom(null, (get, set) => {
     const nextTab = newTabs[index - 1] ?? newTabs[0];
     set(activeTabIdAtom, nextTab.id);
   }
+
+  set(syncUrlAtom);
 });
