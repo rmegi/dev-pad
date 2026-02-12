@@ -81,4 +81,6 @@ export const deleteActiveTabAtom = atom(null, (get, set) => {
     const nextTab = newTabs[index - 1] ?? newTabs[0];
     set(activeTabIdAtom, nextTab.id);
   }
+
+  set(syncUrlAtom);
 });
