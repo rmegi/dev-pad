@@ -21,23 +21,24 @@ Everything lives locally in your browser, so it’s fast, private, and always av
 - Node.js (18+ recommended)
 - npm or pnpm
 
-### Installation
+### Build & run local
 
 ```bash
 npm install
 ```
 
-### Run the app
-
 ```bash
 npm run dev
 ```
+### Build & run the Docker image
 
-Then open:
-```
-http://localhost:5173
+```bash
+docker build -t dev-pad .
 ```
 
+```bash
+docker run --rm -it -p 5173:5173 dev-pad
+```
 
 ## Philosophy
 
