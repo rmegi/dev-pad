@@ -12,8 +12,6 @@ Everything lives locally in your browser, so it’s fast, private, and always av
 - **Tailwind CSS** for styling
 - **Jotai** for state management
 
----
-
 ## Getting Started
 
 ### Prerequisites
