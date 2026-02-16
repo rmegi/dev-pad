@@ -49,3 +49,7 @@ DevPad is intentionally **simple**:
 - No sync (yet)
 
 It’s meant to be your **personal scratchpad for code**, not another heavy editor.
+
+## License
+
+This project is licensed under the MIT License.
