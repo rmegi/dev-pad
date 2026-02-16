@@ -38,7 +38,7 @@ docker build -t dev-pad .
 docker run --rm -it -p 5173:5173 dev-pad
 ```
 ### Live Demo
-https://dev-pad-dark.vercel.app
+https://dev-pad-demo.vercel.app
 
 ## Philosophy
 
