@@ -16,7 +16,7 @@ const MainEditor = () => {
     <main className="flex-1 p-6 overflow-hidden flex flex-col">
       {/* Title */}
       <input
-        className="bg-transparent text-2xl font-semibold outline-none mb-4"
+        className="bg-transparent text-2xl font-semibold outline-none mb-4 text-[var(--text)] placeholder:text-[var(--muted-2)]"
         value={activeTab.title}
         onChange={(e) => setTitle(e.target.value)}
       />
@@ -27,7 +27,8 @@ const MainEditor = () => {
           flex-1
           w-full
           bg-transparent
-          text-slate-200
+          text-[var(--text)]
+          placeholder:text-[var(--muted-2)]
           outline-none
           resize-none
           font-mono

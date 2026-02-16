@@ -33,8 +33,8 @@ const TabItem: React.FC<TabItemProps> = ({ id, title, active, onClick }) => {
       className={`px-3 py-2 rounded-md text-sm transition flex justify-between items-center mb-2 cursor-grab active:cursor-grabbing
         ${
           active
-            ? "bg-slate-800 text-slate-200"
-            : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
+            ? "bg-[var(--tab-active)] text-[var(--text)]"
+            : "text-[var(--muted)] hover:bg-[var(--tab-hover)] hover:text-[var(--text)]"
         }`}
       onClick={onClick}
     >
@@ -46,7 +46,7 @@ const TabItem: React.FC<TabItemProps> = ({ id, title, active, onClick }) => {
             e.stopPropagation();
             deleteTab();
           }}
-          className="text-slate-400 hover:text-red-500 hover:text-lg transition-colors"
+          className="text-[var(--muted)] hover:text-[var(--danger)] hover:text-lg transition-colors"
         >
           <MdDelete />
         </button>

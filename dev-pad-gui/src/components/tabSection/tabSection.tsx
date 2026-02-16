@@ -50,10 +50,10 @@ const TabSection: React.FC = () => {
   return (
     <div className="mt-4 px-2 flex-1 flex flex-col min-h-0">
       <div className="flex items-center justify-between mb-2 flex-shrink-0">
-        <p className="px-2 text-xs uppercase text-slate-500">Tabs</p>
+        <p className="px-2 text-xs uppercase text-[var(--muted-2)]">Tabs</p>
         <button
           onClick={addTab}
-          className="text-slate-400 hover:text-white transition-colors text-xl hover:font-bold"
+          className="text-[var(--muted)] hover:text-[var(--text)] transition-colors text-xl hover:font-bold"
         >
           +
         </button>
