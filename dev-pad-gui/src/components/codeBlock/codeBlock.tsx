@@ -16,14 +16,14 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
     };
 
   return (
-    <div className="bg-slate-900 border border-slate-700 rounded-lg p-4 font-mono relative group">
+    <div className="bg-[var(--surface-2)] border border-[var(--border)] rounded-lg p-4 font-mono relative group">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs uppercase text-purple-400">
+        <span className="text-xs uppercase text-[var(--accent)]">
           {language}
         </span>
         <CopyButton onClick={() => copyToClipboard(code)} />
       </div>
-      <pre className="text-sm leading-relaxed whitespace-pre-wrap text-slate-200">
+      <pre className="text-sm leading-relaxed whitespace-pre-wrap text-[var(--text)]">
         {code}
       </pre>
     </div>
