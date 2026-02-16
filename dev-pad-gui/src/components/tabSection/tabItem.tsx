@@ -3,18 +3,34 @@ import { MdDelete } from "react-icons/md";
 import { useAtom } from "jotai";
 import { deleteActiveTabAtom } from "../../atoms/tabsAtom";
 
-interface PageItemProps {
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
+interface TabItemProps {
+  id: string;
   title: string;
   active?: boolean;
   onClick?: () => void;
 }
 
-const PageItem: React.FC<PageItemProps> = ({ title, active, onClick }) => {
+const TabItem: React.FC<TabItemProps> = ({ id, title, active, onClick }) => {
   const [, deleteTab] = useAtom(deleteActiveTabAtom);
+
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   return (
     <div
-      className={`px-3 py-2 rounded-md text-sm   transition flex justify-between items-center mb-2
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className={`px-3 py-2 rounded-md text-sm transition flex justify-between items-center mb-2 cursor-grab active:cursor-grabbing
         ${
           active
             ? "bg-slate-800 text-slate-200"
@@ -23,6 +39,7 @@ const PageItem: React.FC<PageItemProps> = ({ title, active, onClick }) => {
       onClick={onClick}
     >
       {title}
+
       {active && (
         <button
           onClick={(e) => {
@@ -38,4 +55,4 @@ const PageItem: React.FC<PageItemProps> = ({ title, active, onClick }) => {
   );
 };
 
-export default PageItem;
+export default TabItem;

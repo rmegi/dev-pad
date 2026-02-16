@@ -84,3 +84,7 @@ export const deleteActiveTabAtom = atom(null, (get, set) => {
 
   set(syncUrlAtom);
 });
+
+export const reorderTabsAtom = atom(null, (get, set, newTabs: Tab[]) => {
+  set(tabsAtom, newTabs);
+});
