@@ -2,12 +2,18 @@
   "name": "dev-pad-gui",
   "private": true,
   "version": "0.0.0",
+  "main": "electron/main.mjs",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
+    "dev:web": "vite --host",
+    "dev:electron": "concurrently -k \"vite --host --strictPort --port 5173\" \"wait-on tcp:5173 && cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .\"",
     "build": "tsc -b && vite build",
+    "build:web": "tsc -b && vite build",
+    "build:electron": "npm run build:web && electron-builder",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start:electron": "electron ."
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -31,6 +37,10 @@
     "@typescript-eslint/parser": "^7.18.0",
     "@vitejs/plugin-react-swc": "^4.2.2",
     "autoprefixer": "^10.4.23",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^37.7.1",
+    "electron-builder": "^26.0.12",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
@@ -44,6 +54,19 @@
     "tailwindcss": "^4.1.18",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.54.0",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "wait-on": "^8.0.5"
+  },
+  "build": {
+    "appId": "com.devpad.app",
+    "productName": "DevPad",
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    }
   }
 }
