@@ -1,27 +1,20 @@
-import React from 'react';
+import React from "react";
 import { FaRegCopy } from "react-icons/fa";
 
 interface CopyButtonProps {
-    onClick?: () => void;
+  onClick?: () => void;
 }
+
 const CopyButton: React.FC<CopyButtonProps> = ({ onClick }) => {
-    
-    return (
-        <button
-          onClick={onClick}
-          className="
-          text-xs
-          text-[var(--muted)]
-          opacity-0
-          group-hover:opacity-100
-          hover:text-[var(--accent)]
-          hover:cursor-pointer
-            transition
-          "
-        >
-            <FaRegCopy />
-        </button>
-    );
+  return (
+    <button
+      onClick={onClick}
+      className="focus-ring inline-flex h-7 w-7 items-center justify-center rounded-full text-xs text-[var(--muted)] opacity-0 transition-all duration-[var(--duration-fast)] ease-[var(--easing-standard)] group-hover:opacity-100 hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
+      aria-label="Copy code"
+    >
+      <FaRegCopy />
+    </button>
+  );
 };
 
 export default CopyButton;

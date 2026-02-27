@@ -12,7 +12,7 @@ const ThemeButton: React.FC = () => {
       onClick={() =>
         setTheme((current) => (current === "dark" ? "light" : "dark"))
       }
-      className="h-6 w-6 inline-flex items-center justify-center rounded-md border border-[var(--border)] bg-[var(--surface-2)] text-[var(--muted)] hover:text-[var(--text)] hover:border-[var(--muted)] transition-colors"
+      className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface-strong)] text-[var(--muted)] shadow-[var(--shadow-1)] transition-all duration-[var(--duration-fast)] ease-[var(--easing-standard)] hover:text-[var(--text)]"
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
     >
       {theme === "dark" ? <MdLightMode /> : <MdDarkMode />}

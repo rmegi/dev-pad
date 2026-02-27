@@ -14,51 +14,72 @@ const HomePage = () => {
 
   return (
     <div
-      className="theme-root flex h-screen bg-[var(--bg)] text-[var(--text)] transition-colors"
+      className="theme-root relative flex h-screen overflow-hidden text-[var(--text)] transition-colors duration-[var(--duration-base)] ease-[var(--easing-standard)]"
       data-theme={theme}
     >
-      <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-[var(--surface)] border-b border-[var(--border)] flex items-center justify-between px-4 z-50">
+      <div className="pointer-events-none absolute -left-24 -top-40 h-80 w-80 rounded-full bg-[var(--bg-grad-a)] blur-3xl" />
+      <div className="pointer-events-none absolute -right-16 top-8 h-72 w-72 rounded-full bg-[var(--bg-grad-b)] blur-3xl" />
+
+      <div className="glass thin-separator fixed left-3 right-3 top-3 z-50 flex h-14 items-center justify-between rounded-2xl px-4 md:hidden">
         <button
           onClick={() => setSidebarOpen(true)}
-          className="text-xl text-[var(--text)]"
+          className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full text-lg text-[var(--text)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--accent-soft)]"
+          aria-label="Open sidebar"
         >
           <FiMenu />
         </button>
-        <img src="/devPadLogo.svg" alt="DevPad Logo" className="h-6 w-6" />
+        <div className="flex items-center gap-2">
+          <img src="/devPadLogo.svg" alt="DevPad Logo" className="h-6 w-6" />
+          <span className="text-sm font-semibold tracking-tight">DevPad</span>
+        </div>
+        <ThemeButton />
       </div>
 
-      <aside className="hidden md:flex w-64 bg-[var(--surface)] border-r border-[var(--border)] flex-col">
-        <div className="px-4 py-3 flex items-center justify-between">
-          <div className="text-lg font-semibold">DevPad</div>
+      <aside className="glass thin-separator relative z-10 hidden w-72 flex-col rounded-r-[1.5rem] border-l-0 border-t-0 border-b-0 md:flex">
+        <div className="thin-separator flex items-center justify-between border-b px-5 py-5">
+          <div>
+            <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted-2)]">
+              Workspace
+            </p>
+            <div className="mt-1 text-2xl font-semibold tracking-tight">DevPad</div>
+          </div>
+          <ThemeButton />
         </div>
 
         <TabSection />
 
-        <div className="p-3 border-t border-[var(--border)] text-xs text-[var(--muted-2)] flex items-center justify-between">
+        <div className="thin-separator mt-3 flex items-center justify-between border-t px-5 py-4 text-xs text-[var(--muted-2)]">
           <div>
             Developed by{" "}
-            <a href="https://github.com/rmegi" className="underline">
+            <a
+              href="https://github.com/rmegi"
+              className="focus-ring rounded px-1 font-medium text-[var(--muted)] underline decoration-[var(--muted-2)] decoration-1 underline-offset-3 transition-colors hover:text-[var(--text)]"
+            >
               rmegi
             </a>
           </div>
-
-          <ThemeButton />
         </div>
       </aside>
 
       {sidebarOpen && (
-        <div className="md:hidden fixed inset-0 z-50 flex">
+        <div className="fixed inset-0 z-50 flex md:hidden">
           <div
-            className="absolute inset-0 bg-black/50"
+            className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm"
             onClick={() => setSidebarOpen(false)}
           />
 
-          <aside className="relative w-72 max-w-[85%] h-full bg-[var(--surface)] border-r border-[var(--border)] flex flex-col">
-            <div className="px-4 py-3 flex items-center justify-between border-b border-[var(--border)]">
-              <div className="text-lg font-semibold">DevPad</div>
+          <aside className="glass thin-separator relative h-full w-80 max-w-[86%] rounded-r-[1.5rem] border-l-0 border-t-0 border-b-0">
+            <div className="thin-separator flex items-center justify-between border-b px-5 py-5">
+              <div>
+                <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted-2)]">
+                  Workspace
+                </p>
+                <div className="mt-1 text-2xl font-semibold tracking-tight">DevPad</div>
+              </div>
               <button
                 onClick={() => setSidebarOpen(false)}
-                className="text-xl text-[var(--text)]"
+                className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full text-xl text-[var(--text)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--accent-soft)]"
+                aria-label="Close sidebar"
               >
                 <FiX />
               </button>
@@ -66,10 +87,13 @@ const HomePage = () => {
 
             <TabSection />
 
-            <div className="p-3 border-t border-[var(--border)] text-xs text-[var(--muted-2)] flex items-center justify-between">
+            <div className="thin-separator mt-3 flex items-center justify-between border-t px-5 py-4 text-xs text-[var(--muted-2)]">
               <div>
                 Developed by{" "}
-                <a href="https://github.com/rmegi" className="underline">
+                <a
+                  href="https://github.com/rmegi"
+                  className="focus-ring rounded px-1 font-medium text-[var(--muted)] underline decoration-[var(--muted-2)] decoration-1 underline-offset-3 transition-colors hover:text-[var(--text)]"
+                >
                   rmegi
                 </a>
               </div>
@@ -80,7 +104,7 @@ const HomePage = () => {
         </div>
       )}
 
-      <main className="flex-1 w-full pt-14 md:pt-0">
+      <main className="z-10 flex w-full flex-1 pt-20 md:pt-0">
         <MainEditor />
       </main>
     </div>

@@ -3,24 +3,24 @@ import TabItem from "./tabItem";
 import { useAtom, useSetAtom } from "jotai";
 import {
   DndContext,
-  closestCenter,
   PointerSensor,
+  closestCenter,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
-import { restrictToParentElement } from "@dnd-kit/modifiers";
+import { restrictToParentElement, restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import {
-  arrayMove,
   SortableContext,
+  arrayMove,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import {
   activeTabIdAtom,
   addTabAtom,
-  tabsAtom,
   reorderTabsAtom,
+  tabsAtom,
 } from "../../atoms/tabsAtom";
+import { FiPlus } from "react-icons/fi";
 
 const TabSection: React.FC = () => {
   const [tabs] = useAtom(tabsAtom);
@@ -48,18 +48,20 @@ const TabSection: React.FC = () => {
   };
 
   return (
-    <div className="mt-4 px-2 flex-1 flex flex-col min-h-0">
-      <div className="flex items-center justify-between mb-2 flex-shrink-0">
-        <p className="px-2 text-xs uppercase text-[var(--muted-2)]">Tabs</p>
+    <div className="mt-2 flex min-h-0 flex-1 flex-col px-3 pb-2">
+      <div className="mb-2 flex shrink-0 items-center justify-between px-2">
+        <p className="text-xs uppercase tracking-[0.14em] text-[var(--muted-2)]">Tabs</p>
         <button
           onClick={addTab}
-          className="text-[var(--muted)] hover:text-[var(--text)] transition-colors text-xl hover:font-bold"
+          className="focus-ring inline-flex items-center gap-1.5 rounded-full bg-[var(--accent-soft)] px-3 py-1.5 text-xs font-semibold text-[var(--accent)] transition-all duration-[var(--duration-fast)] ease-[var(--easing-standard)] hover:brightness-110"
+          aria-label="Add tab"
         >
-          +
+          <FiPlus className="text-sm" />
+          New
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto overflow-x-hidden relative min-h-0">
+      <div className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20 flex-1 overflow-y-auto overflow-x-hidden pr-1">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
